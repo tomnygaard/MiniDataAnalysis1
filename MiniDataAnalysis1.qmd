@@ -191,7 +191,14 @@ Your task is to create a table that calculates the proportion of missing values 
 
 ```{r}
 ### Explore missingness here ###
+missing <- data.frame(
+  Proportion_Missing = round(colMeans(is.na(housingDf)),3)
+)
 
+print(missing)
+
+print(missing) |>
+  filter(Proportion_Missing != 0.000)
 ```
 
 
@@ -214,10 +221,7 @@ Based on this definition, is missingness an issue for your analysis? If so, desc
 If missingness is not an issue, describe why.
 
 <!-------------------------- Start your work below ---------------------------->
-
-
-
-
+No missingness will not be an issue for me in this data analysis. The missing data in the boulder housing is within the variables Grantor 1, Care of, and Mailing address 2. These variables are not applicable to the land value, sqft, or location so my analysis will not be affected by the missing values. 
 <!----------------------------------------------------------------------------->
 
 
@@ -241,9 +245,14 @@ Show the first 6 rows of the tidied data.
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
+#Keeping only the important columns
+#The columns are already in tidy form (columns are variables)
+housingTidy <- housingDf |>
+  select(LOCCITY, LAND_VALUE, ABOVE_GROUND_SQFT)
 
-
-
+#Removing the "$" at the beginning of the land values, then converting the land values to integers wile removing the commas.
+housingTidy <- housingTidy |>
+  mutate(LAND_VALUE = as.integer(gsub(",", "", substring(LAND_VALUE,2))))
 
 ```
 
@@ -258,9 +267,8 @@ Show the outputted table.
 
 <!-------------------------- Start your work below ---------------------------->
 ```{r}
-
-
-
+housingTidy |>
+  summarize(meanLandValue = mean(LAND_VALUE, na.rm = TRUE), minLandValue = min(LAND_VALUE,na.rm = TRUE), maxLandValue= max(LAND_VALUE, na.rm = TRUE), meanAboveSqft = mean(ABOVE_GROUND_SQFT, na.rm = TRUE), minAboveSqft = min(ABOVE_GROUND_SQFT, na.rm=TRUE), maxAboveSqft = max(ABOVE_GROUND_SQFT, na.rm = TRUE))
 
 ```
 
