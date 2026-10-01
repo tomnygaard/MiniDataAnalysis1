@@ -16,7 +16,7 @@ Let's get ready to work on this assignment!
 
 - Install the [`diversedata`](https://diverse-data-hub.github.io/) package by typing the following into your **R console**:
 
-```{r}
+```
 install.packages("pak")
 library(pak)
 pak::pak("diverse-data-hub/diversedata")
