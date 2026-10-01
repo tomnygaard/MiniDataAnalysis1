@@ -30,7 +30,7 @@ Typically, R Packages are loaded in at the very beginning of the analysis. If yo
 #| warning: false
 #| message: false
 library(tidyverse)
-library(diversedata)
+#library(diversedata)
 library(moderndive)
 #--- Add any other packages below this line ---#
 
@@ -73,11 +73,9 @@ Out of the 5 data sets listed above, choose **2** that appeal to you based on th
 
 <!-------------------------- Start your work below ---------------------------->
 
-1: Write 1st choice here
-  boulder housing
+1: Boulder Housing
 
-2: Write 2nd choice here
-  Squirrel data
+2: Squirrel Census
 
 <!----------------------------------------------------------------------------->
 
@@ -91,8 +89,13 @@ One way to narrowing down your selection is to *explore* the data sets. Use your
 #### Data Set 1
 ```{r}
 ### Explore 3 variables of data set 1 ###
+
+#Variables Explored: BLDG1_YEAR_BUILT, BEDROOM, ABOVE_GROUND_SQFT, LOCCITY
+
 housingDf = read_csv('dat/boulder-2020-residential_sales.csv')
+
 glimpse(housingDf)
+
 housingDf |>
   ggplot(aes(BLDG1_YEAR_BUILT, BEDROOMS)) +
   geom_point()
@@ -103,10 +106,9 @@ housingDf |>
 ```
 
 
-Write your findings here.
-  There is no clear relationship between year build and the amount of bedrooms per house.
-  The amount of bedrooms tends to be less than 6, however there are some outliers. 
-  The highest mean above ground sqrt is located in Erie.
+There is no clear relationship between year build and the amount of bedrooms per house.
+The amount of bedrooms tends to be less than 6, however there are some outliers. 
+The highest mean above ground sqft is located in Erie, and the lowest mean above ground sqft is located in Ward.
 
 
 
@@ -114,17 +116,29 @@ Write your findings here.
 ```{r}
 ### Explore 3 variables of data set 2 ###
 
+#Variables explored: Location, Park Name, Primary Fur Color
+
+squirrelDf = read_csv('dat/squirrel-data.csv')
+
+glimpse(squirrelDf)
+
+squirrelDf |>
+  ggplot(aes(x =`Location`)) +
+  geom_bar() + 
+  coord_flip()
+
+squirrelDf |>
+  ggplot(aes(x=`Park Name`, color = `Primary Fur Color`)) +
+  geom_bar() +
+  coord_flip()
+
 ```
 
-Write your findings here.
-
+A majority of squirrels are located on the Ground plane. In Washington Square park all of the squirrels have Gray fur color. All of the parks contain some Gray squirrels, McCarren park contains the most Cinnamon fur colored squirrels.
 
 
 
 <!----------------------------------------------------------------------------->
-
-
-
 
 
 
@@ -134,8 +148,7 @@ Write your findings here.
 It's time to choose only one data set. State the data set that you've chosen, and why you've chosen it.
 
 <!-------------------------- Start your work below ---------------------------->
-
-
+I have chosen the Boulder Housing data set. I selected Boulder Housing because I believe it has better/more valuable data when compared to the squirrel data set.
 
 <!----------------------------------------------------------------------------->
 
@@ -150,7 +163,8 @@ Write your research questions **as questions**, and be specific. You can change 
 
 <!-------------------------- Start your work below ---------------------------->
 
-
+Is there a relationship between Location/City and the land value?
+Does the land value then result in larger homes/more above ground sqft?
 
 
 <!----------------------------------------------------------------------------->
