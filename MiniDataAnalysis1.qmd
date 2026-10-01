@@ -195,8 +195,10 @@ missing <- data.frame(
   Proportion_Missing = round(colMeans(is.na(housingDf)),3)
 )
 
+#Displays all the Variables and their proportion of missing values
 print(missing)
 
+#Filters to show only the variables with missing values
 print(missing) |>
   filter(Proportion_Missing != 0.000)
 ```
@@ -254,6 +256,7 @@ housingTidy <- housingDf |>
 housingTidy <- housingTidy |>
   mutate(LAND_VALUE = as.integer(gsub(",", "", substring(LAND_VALUE,2))))
 
+head(housingTidy, 6)
 ```
 
 <!----------------------------------------------------------------------------->
